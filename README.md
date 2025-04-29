@@ -14,34 +14,32 @@ Este sistema conecta una diadema NeuroSky MindWave con un sistema de visualizaci
 - Enviar datos emocionales a TouchDesigner vía UDP.
 - Almacenar datos etiquetados para entrenar modelos supervisados.
 
-## 🗂️ Estructura del Proyecto
+## 📁 Estructura del Proyecto
 
-
+```plaintext
 synapseart/
-│
-├── data/                         # Donde se guardan los JSON etiquetados (por usuario, fecha...)
-│   └── recordings/
+├── data/
+│   └── recordings/            # Donde se guardan los JSON etiquetados
 │       └── user_01_2024-03-28.json
-│
-├── src/                          # Código fuente de la aplicación
-│   ├── _init_.py
-│   ├── devices/                  # Código relacionado con la diadema NeuroSky
-│   │   └── neurosky_client.py
-│   ├── processing/              # Procesamiento de señales y emociones
+├── src/                       # Código fuente de la aplicación
+│   ├── __init__.py
+│   ├── devices/
+│   │   └── neurosky_client.py # Conexión con NeuroSky
+│   ├── processing/
 │   │   ├── emotion_normalizer.py
 │   │   └── emotion_classifier.py
-│   ├── utils/                   # Funciones útiles como normalización, validación, etc.
-│   │   └── json_utils.py
-│   └── udp_sender.py            # Envío a TouchDesigner
-│
-├── tests/                       # Pruebas unitarias si las necesitas
-│
-├── main.py                      # Script principal de ejecución
-├── data_logger.py               # Guardado etiquetado en crudo (como MVP)
-├── russell.py                   # Pruebas de clasificación de emociones
-├── synapse.py                   # Visualización TouchDesigner (producción UDP)
-├── requirements.txt             # Librerías necesarias
-└── README.md                    # Documentación del proyecto
+│   ├── utils/
+│   │   ├── json_utils.py
+│   │   └── udp_sender.py
+├── tests/                     # Pruebas unitarias si las necesitas
+├── main.py                    # Script principal (envía emociones por UDP)
+├── data_logger.py             # Guardado etiquetado en crudo (MVP)
+├── russell.py                 # Pruebas de clasificación de emociones
+├── sypnase.py                 # Visualización en TouchDesigner
+├── requirements.txt           # Librerías necesarias
+└── README.md                  # Documentación del proyecto
+```
+
 
 ## ⚙️ Ejecución
 
@@ -49,7 +47,9 @@ synapseart/
 python main.py
 ```
 Para guardar datos etiquetados con emociones reales:
+```bash
 python data_logger.py
+```
 
 📡 Formato de salida emocional
 {
