@@ -1,5 +1,5 @@
 class EmotionClassifier:
-    def _init_(self):
+    def __init__(self):
         pass
 
     def classify_emotions(self, eeg):

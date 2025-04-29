@@ -1,11 +1,10 @@
 # synapseart/data/data_logger.py
-
 import os
 import json
 from datetime import datetime
 
 class DataLogger:
-    def _init_(self, base_path="data/raw"):
+    def __init__(self, base_path="data/raw"):
         self.base_path = base_path
         os.makedirs(base_path, exist_ok=True)
         self.log_file = None

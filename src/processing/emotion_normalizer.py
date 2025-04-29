@@ -1,5 +1,5 @@
 class EmotionNormalizer:
-    def _init_(self):
+    def __init__(self):
         # Rango estimado de valores reales según documentación y pruebas
         self.ranges = {
             'delta': (10000, 300000),

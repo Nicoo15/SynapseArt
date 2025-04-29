@@ -20,7 +20,7 @@ def conectar_neurosky():
     return sock
 
 class EmotionProcessor:
-    def _init_(self, window_size=10):
+    def __init__(self, window_size=10):
         self.buffers = {
             'delta': deque(maxlen=window_size),
             'theta': deque(maxlen=window_size),

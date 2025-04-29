@@ -2,7 +2,7 @@ import socket
 import json
 
 class UDPSender:
-    def _init_(self, ip='127.0.0.1', port=5005):
+    def __init__(self, ip='127.0.0.1', port=7000):
         self.address = (ip, port)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 

@@ -1,0 +1,15 @@
+# Ignorar caché de Python
+__pycache__/
+*.pyc
+
+# Entornos virtuales
+.env/
+.venv/
+*.env
+
+# Archivos temporales
+*.log
+*.DS_Store
+
+# Carpetas ocultas de VSCode
+.vscode/
