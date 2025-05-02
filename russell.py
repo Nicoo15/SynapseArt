@@ -29,7 +29,7 @@ class EmotionProcessor:
             'gamma': deque(maxlen=window_size),
         }
         self.ranges = {
-            'delta': (1000, 100000),
+            'delta': (1000, 100001),
             'theta': (1000, 100000),
             'alpha': (1000, 100000),
             'beta': (500, 100000),
