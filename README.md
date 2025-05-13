@@ -19,25 +19,28 @@ Este sistema conecta una diadema NeuroSky MindWave con un sistema de visualizaci
 ```plaintext
 synapseart/
 ├── data/
-│   └── recordings/            # Donde se guardan los JSON etiquetados
-│       └── user_01_2024-03-28.json
-├── src/                       # Código fuente de la aplicación
-│   ├── __init__.py
+│   └── recordings/                  # Datos crudos etiquetados por usuario y emoción
+│       └── Nico_felicidad_2025-05-13.json
+│
+├── dataset_recorder/
+│   ├── data_logger.py              # Clase que gestiona y guarda sesiones etiquetadas
+│   
+│
+├── src/
 │   ├── devices/
-│   │   └── neurosky_client.py # Conexión con NeuroSky
+│   │   └── neurosky_client.py      # Cliente TCP para recibir datos EEG
 │   ├── processing/
-│   │   ├── emotion_normalizer.py
-│   │   └── emotion_classifier.py
+│   │   ├── emotion_normalizer.py   # Normaliza valores EEG entre 0 y 100
+│   │   └── emotion_classifier.py   # Clasifica emociones con base en EEG y modelo Russell
 │   ├── utils/
-│   │   ├── json_utils.py
-│   │   └── udp_sender.py
-├── tests/                     # Pruebas unitarias si las necesitas
-├── main.py                    # Script principal (envía emociones por UDP)
-├── data_logger.py             # Guardado etiquetado en crudo (MVP)
-├── russell.py                 # Pruebas de clasificación de emociones
-├── sypnase.py                 # Visualización en TouchDesigner
-├── requirements.txt           # Librerías necesarias
-└── README.md                  # Documentación del proyecto
+│   │   ├── json_utils.py           # Utilidades para guardar datos como JSON
+│   │   └── udp_sender.py           # Cliente UDP para enviar emociones a TouchDesigner
+│   └── __init__.py
+│
+├── main.py                         # Script principal: procesa y envía emociones por UDP
+├── requirements.txt                # Dependencias del proyecto
+└── README.md                       # Documentación del proyecto
+└── record.py                   # Script para grabar sesiones con etiqueta en tiempo real
 ```
 
 
@@ -48,7 +51,7 @@ python main.py
 ```
 Para guardar datos etiquetados con emociones reales:
 ```bash
-python data_logger.py
+python record.py
 ```
 
 📡 Formato de salida emocional
