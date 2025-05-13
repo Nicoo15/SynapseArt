@@ -1,7 +1,7 @@
 from src.devices.neurosky_client import NeuroSkyClient
 from src.processing.emotion_normalizer import EmotionNormalizer
 from src.processing.emotion_classifier import EmotionClassifier
-from data_logger import DataLogger
+from src.udp_sender import UDPSender
 
 import json
 import time
@@ -10,41 +10,38 @@ def main():
     print("🔌 Conectando a la diadema NeuroSky...")
     client = NeuroSkyClient()
     client.connect()
+    print(" Conectado a NeuroSky")
 
     print("Inicializando módulos de procesamiento...")
     normalizer = EmotionNormalizer()
     classifier = EmotionClassifier()
-    logger = DataLogger()
+    udp_sender = UDPSender(ip='127.0.0.1', port=7000)
+    print(" Módulos inicializados")
 
-    print("Etiqueta la emoción actual del usuario (escribe y pulsa ENTER)")
-    print("Opciones: felicidad, tristeza, calma, excitación, preocupación, enfado, depresión, serenidad")
-    user_label = input("Etiqueta: ").strip().lower()
+    print("\nEnviando emociones por UDP... Presiona CTRL+C para detener.\n")
 
-    print("\n Grabando datos... Presiona CTRL+C para detener.\n")
     try:
         while True:
             raw_data = client.read_data()
-            if not raw_data or "eegPower" not in raw_data:
+            if not raw_data or "eegPower" not in raw_data or "eSense" not in raw_data:
                 continue
 
-            normalized = normalizer.normalize(raw_data)
-            emotions = classifier.classify(normalized)
+            # Unificar eegPower y eSense en un solo diccionario
+            eeg_values = {**raw_data["eegPower"], **raw_data["eSense"]}
 
+            # Normalizar y clasificar
+            normalized = normalizer.normalize_all(eeg_values)
+            emotions = classifier.classify_emotions(normalized)
+
+            # Imprimir y enviar
             print(json.dumps(emotions, ensure_ascii=False, indent=2))
+            udp_sender.send(emotions)
 
-            logger.log_data(
-                raw_eeg=raw_data,
-                normalized=normalized,
-                emotions=emotions,
-                label=user_label
-            )
-
-            time.sleep(0.3)
 
     except KeyboardInterrupt:
-        print("\n Grabación detenida por el usuario.")
+        print("\n Conexión finalizada por el usuario.")
     finally:
         client.close()
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     main()

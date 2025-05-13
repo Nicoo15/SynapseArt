@@ -8,7 +8,7 @@ class UDPSender:
 
     def send(self, data):
         try:
-            json_data = json.dumps(data)
+            json_data = json.dumps(data) + '\n'  # <--- CLAVE
             self.sock.sendto(json_data.encode('utf-8'), self.address)
         except Exception as e:
             print(f"[ERROR] UDP Send Failed: {e}")

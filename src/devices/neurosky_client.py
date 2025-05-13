@@ -2,7 +2,7 @@ import socket
 import json
 
 class NeuroSkyClient:
-    def _init_(self, host='127.0.0.1', port=13854):
+    def __init__(self, host='127.0.0.1', port=13854):
         self.host = host
         self.port = port
         self.sock = None
@@ -10,25 +10,26 @@ class NeuroSkyClient:
     def connect(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.host, self.port))
-        config = json.dumps({"enableRawOutput": False, "format": "Json"})
-        self.sock.sendall((config + '\n').encode('utf-8'))
-        print("[NeuroSkyClient] Conectado a NeuroSky MindWave")
+        config = {
+            "enableRawOutput": True,
+            "format": "Json"
+        }
+        self.sock.sendall(json.dumps(config).encode('utf-8'))
+        print(" Conectado a NeuroSky")
 
     def read_data(self):
-        if self.sock:
-            buffer = b''
-            while True:
-                chunk = self.sock.recv(2048)
-                buffer += chunk
-                try:
-                    parts = buffer.split(b'\r')
-                    for part in parts[:-1]:
-                        yield json.loads(part.decode('utf-8'))
-                    buffer = parts[-1]
-                except json.JSONDecodeError:
-                    continue
+        try:
+            data = self.sock.recv(2048).decode('utf-8')
+            for line in data.split('\r'):
+                if line.strip():
+                    return json.loads(line)
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            print("[ERROR] Lectura de datos fallida: JSON inválido o incompleto")
+        except Exception as e:
+            print(f"[ERROR] Desconocido al leer datos: {e}")
+        return {}
 
     def close(self):
         if self.sock:
             self.sock.close()
-            print("[NeuroSkyClient] Conexión cerrada")
+            print(" Conexión cerrada.")

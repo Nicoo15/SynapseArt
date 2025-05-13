@@ -1,0 +1,65 @@
+[
+  {
+    "timestamp": "2025-05-13T13:26:59.870824",
+    "label": "felicidad",
+    "raw": {
+      "eSense": {
+        "attention": 75,
+        "meditation": 13
+      },
+      "eegPower": {
+        "delta": 588447,
+        "theta": 49585,
+        "lowAlpha": 6230,
+        "highAlpha": 9705,
+        "lowBeta": 6425,
+        "highBeta": 11616,
+        "lowGamma": 5189,
+        "highGamma": 2110
+      },
+      "poorSignalLevel": 0
+    }
+  },
+  {
+    "timestamp": "2025-05-13T13:27:05.884156",
+    "label": "felicidad",
+    "raw": {
+      "eSense": {
+        "attention": 78,
+        "meditation": 20
+      },
+      "eegPower": {
+        "delta": 115389,
+        "theta": 54115,
+        "lowAlpha": 35981,
+        "highAlpha": 21991,
+        "lowBeta": 11705,
+        "highBeta": 12278,
+        "lowGamma": 16060,
+        "highGamma": 2539
+      },
+      "poorSignalLevel": 0
+    }
+  },
+  {
+    "timestamp": "2025-05-13T13:27:09.870520",
+    "label": "felicidad",
+    "raw": {
+      "eSense": {
+        "attention": 66,
+        "meditation": 40
+      },
+      "eegPower": {
+        "delta": 114939,
+        "theta": 162075,
+        "lowAlpha": 28875,
+        "highAlpha": 50613,
+        "lowBeta": 34031,
+        "highBeta": 15412,
+        "lowGamma": 9679,
+        "highGamma": 9545
+      },
+      "poorSignalLevel": 0
+    }
+  }
+]
