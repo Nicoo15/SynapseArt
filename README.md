@@ -55,6 +55,7 @@ python record.py
 ```
 
 📡 Formato de salida emocional
+```json
 {
   "attention": 47,
   "meditation": 47,
@@ -68,6 +69,7 @@ python record.py
   "enfado": 15,
   "clasificacion_global": "Activa/positiva"
 }
+```
 ## 🧠 Modelo de emociones
 Basado en el modelo de Russell y referencias científicas de NeuroSky y Stanford:
 
